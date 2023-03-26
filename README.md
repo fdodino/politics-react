@@ -1,33 +1,34 @@
 ## Ejemplo Politics
 
-[![Build React App](https://github.com/uqbar-project/eg-politics-react/actions/workflows/build.yml/badge.svg)](https://github.com/uqbar-project/eg-politics-react/actions/workflows/build.yml) ![coverage](./badges/coverage-jest%20coverage.svg)
+[![Build React App](https://github.com/fdodino/politics-react/actions/workflows/build.yml/badge.svg)](https://github.com/fdodino/politics-react/actions/workflows/build.yml) ![coverage](./badges/coverage-jest%20coverage.svg)
 
-En este taller vamos a aprender a mapear un modelo de objetos con su contraparte implementada en un motor de base de datos relacional. En esta primera versión queremos presentar la UI que trabaja con un backend ficticio, para entender la problemática que vamos a resolver y para familiarizarnos con el modelo:
+La explicación del ejercicio la podés encontrar en [este repositorio](https://github.com/uqbar-project/eg-politics-react). Aquí vamos a deployar la aplicación a la nube.
 
-![demo](./videos/demoNueva.gif)
+## Deploy a la nube (Render)
 
-## La aplicación
+Creamos un _static site_ como aconseja [este tutorial de Render](https://render.com/docs/deploy-create-react-app), configurando las siguientes propiedades:
 
-Se acercan las elecciones, no importa cuando leas ésto. Una empresa que realiza encuestas de intención de voto quiere registrar el grado de popularidad de les candidates en la próxima votación, para lo cual tenemos que seleccionar una zona, que puede ser un partido, una provincia o bien todo el territorio nacional. En cada zona se agrupan los candidates, que pertenecen a un partido político y en los diferentes actos de campaña que ocurren distintos días hacen diversas promesas, que nosotros dejamos registradas.
+![render settings](./images/render-01-settings.png)
 
-En la pantalla principal podemos seleccionar la zona de votación, lo que define los candidatos asociados a esa zona. Ordenamos les candidates por votos, y podemos
+- General
+  - Name: `politics-react`
+- Build and Deploy
+  - Repository: `https://github.com/fdodino/politics-react` (el link a tu repositorio, podés conectarlo con tu cuenta de Github, darle accesos y eso te habilita a navegar por todos los repositorios asociados)
+  - Branch: `master` (atención que esté sincronizado con el branch que querés usar, sobre todo si es `main`)
+  - El resto de las opciones dejar el default: `yarn build` como Build Command y `build` para Publish Directory
 
-- registrar la intención de voto de une encuestade, algo que debería disparar una actualización en la base (que no tenemos) y además puede reordenar la lista de candidates
-- ver la ficha de un candidate en una ruta aparte, donde podemos adicionalmente agregar nuevas promesas (no borrar por el momento)
+Adicionalmente, toda aplicación React que tenga routing necesita configurar la solapa Redirects/Rewrites:
 
-## Tareas para el taller
+![render / redirect-rewrites](./images/render-02-redirect-rewrites.png)
 
-- Nuestra tarea es resolver la comunicación con el backend y el backend mismo, donde deberíamos persistir el siguiente modelo
+- Source: `/*`
+- Destination: `/public/index.html`
+- Action: `Rewrite`
 
-- cada partido político tiene muchos candidatos, uno para cada zona
-- cada candidato pertenece a un solo partido político a la vez
-- hay diferentes partidos políticos
-  - los peronistas, que pueden ser populistas o no,
-  - los que intentan preservar el estado de las cosas, por eso pertenecen al partido “preservativo”,
-  - y a futuro pueden incorporarse alianzas, conformadas por distintos partidos políticos.
-- cada candidato puede hacer 0, 1 ó más promesas, anotaremos qué prometieron y qué día fue
+y luego deployar. A veces puede avisarte que la aplicación está `Live` pero devolverte un 404, en ese caso hay que deployar manualmente con la opción `Clean build cache & deploy`:
 
-![modelo de datos](./images/modeloDatos.png)
+![render / clean cache & deploy](./images/render-03-clean-cache-deploy.png)
 
-- Cada candidato pertenece a una zona y a un partido político a la vez. 
-- Hay una relación many-to-many entre Zona y Partido (un partido está en varias zonas y en cada zona compiten varios partidos). Candidato termina resultando una entidad asociativa pero ojo, es importante para el negocio.
+Levantemos el backend si es que no está iniciado, y listo, tenemos la app ejecutándose en la nube:
+
+![render deploy full app](./images/render-deploy-full.gif)
