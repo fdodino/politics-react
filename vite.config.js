@@ -20,5 +20,8 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'json', 'html', 'json-summary'],
     },
+  },
+  build: {
+    chunkSizeWarningLimit: 1000,  
   }
 })
