@@ -15,7 +15,7 @@ Creamos un _static site_ como aconseja [este tutorial de Render](https://render.
 - Build and Deploy
   - Repository: `https://github.com/fdodino/politics-react` (el link a tu repositorio, podés conectarlo con tu cuenta de Github, darle accesos y eso te habilita a navegar por todos los repositorios asociados)
   - Branch: `master` (atención que esté sincronizado con el branch que querés usar, sobre todo si es `main`)
-  - El resto de las opciones dejar el default: `yarn build` como Build Command y `build` para Publish Directory
+  - El resto de las opciones utilizar: `npm install; npm run build` como Build Command y `dist` para Publish Directory
 
 Adicionalmente, toda aplicación React que tenga routing necesita configurar la solapa Redirects/Rewrites:
 

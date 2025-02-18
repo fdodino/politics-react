@@ -68,7 +68,7 @@ export const ConsultaCandidates = function() {
   return (
     <div>
       <div className="titulo">
-        Consulta de Candidates
+        Consulta de Candidates v2.0
       </div>
       <div className="section">
         <Dropdown style={{width: '20em', textAlign: 'left'}} optionLabel="descripcion" value={zonaSeleccionada} options={zonas} onChange={(e) => {elegirZona(zonas, e.value)}} placeholder="Seleccione una zona"/>
